@@ -27,6 +27,7 @@ func main() {
 		TraefikV2Mode bool   `env:"TRAEFIK_V2_MODE" envDefault:"false"`
 		TraefikLbURL  string `env:"LB_URL" envDefault:"http://localhost:9091"`
 		LogLevel      string `env:"LOG_LEVEL" envDefault:"info"`
+		version       string `env:"VERSION"`
 	}{
 		ServerConfig: cfg,
 	}
@@ -43,6 +44,7 @@ func main() {
 
 	info := commons.GetBuildInfo()
 	info.Name = "Index Service"
+	info.Version = version
 
 	srv := server.New(rpCfg.ServerConfig, info)
 
