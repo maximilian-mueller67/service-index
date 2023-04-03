@@ -11,9 +11,9 @@ import (
 	"github.com/reportportal/commons-go/v5/server"
 	log "github.com/sirupsen/logrus"
 
-	"github.com/reportportal/service-index/aggregator"
-	"github.com/reportportal/service-index/k8s"
-	"github.com/reportportal/service-index/traefik"
+	"github.com/maximilian-mueller67/service-index/aggregator"
+	"github.com/maximilian-mueller67/service-index/k8s"
+	"github.com/maximilian-mueller67/service-index/traefik"
 )
 
 const httpClientTimeout = 5 * time.Second
@@ -76,6 +76,9 @@ func main() {
 			}
 		})
 		router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+			http.Redirect(w, r, rpCfg.Path+"/ui/", http.StatusFound)
+		})
+		router.HandleFunc("/abc", func(w http.ResponseWriter, r *http.Request) {
 			http.Redirect(w, r, rpCfg.Path+"/ui/", http.StatusFound)
 		})
 		router.HandleFunc("/ui", func(w http.ResponseWriter, r *http.Request) {
