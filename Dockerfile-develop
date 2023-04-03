@@ -2,7 +2,7 @@ FROM golang:1.19.1-alpine
 
 RUN apk --no-cache add build-base git
 
-WORKDIR /go/src/github.com/reportportal/service-index/
+WORKDIR /go/src/github.com/maximilian-mueller67/service-index/
 ARG version
 
 ENV GO111MODULE=on
@@ -19,6 +19,6 @@ FROM alpine:latest
 ARG service
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
-COPY --from=0 /go/src/github.com/reportportal/service-index/bin/service-index ./app
+COPY --from=0 /go/src/github.com/maximilian-mueller67/service-index/bin/service-index ./app
 EXPOSE 8080
 CMD ["./app"]

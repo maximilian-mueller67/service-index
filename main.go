@@ -48,6 +48,7 @@ func main() {
 
 	srv := server.New(rpCfg.ServerConfig, info)
 
+	log.Info("Yoo")
 	log.Infof("K8S mode enabled: %t", rpCfg.K8sMode)
 	var aggreg aggregator.Aggregator
 	if rpCfg.K8sMode {

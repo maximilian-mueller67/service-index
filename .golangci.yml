@@ -18,7 +18,7 @@ linters-settings:
   lll:
     line-length: 140
   goimports:
-    local-prefixes: github.com/reportportal/service-index
+    local-prefixes: github.com/maximilian.mueller-67/service-index
   gocritic:
     enabled-tags:
       - performance
