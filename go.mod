@@ -8,7 +8,6 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/reportportal/commons-go/v5 v5.0.10
 	github.com/sirupsen/logrus v1.9.0
-	k8s.io/apimachinery v0.26.3
 	k8s.io/client-go v0.26.3
 )
 
@@ -49,6 +48,7 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	k8s.io/api v0.26.3 // indirect
+	k8s.io/apimachinery v0.26.3 // indirect
 	k8s.io/klog/v2 v2.90.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20230327201221-f5883ff37f0c // indirect
 	k8s.io/utils v0.0.0-20230313181309-38a27ef9d749 // indirect

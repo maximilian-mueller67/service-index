@@ -154,7 +154,7 @@ func (a *Aggregator) getNodesInfo() (map[string]*NodeInfo, error) {
 
 	nodesInfo := make(map[string]*NodeInfo, 1)
 
-	nodeInfo_1 := &NodeInfo{srv: "10.206.222.23"}
+	nodeInfo_1 := &NodeInfo{srv: "reportportal-analyzer" + "." + "gta.svc.cluster.local"}
 	nodeInfo_1.infoEndpoint = "/info"
 	nodeInfo_1.healthEndpoint = "/health"
 	nodeInfo_1.portName = "8080"
