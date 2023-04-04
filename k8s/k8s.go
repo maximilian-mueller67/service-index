@@ -1,7 +1,6 @@
 package k8s
 
 import (
-	"context"
 	"fmt"
 	"net"
 	"net/http"
@@ -13,7 +12,6 @@ import (
 	"github.com/go-resty/resty/v2"
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 
 	// all auth types are supported
@@ -142,45 +140,58 @@ func (a *Aggregator) aggregate(f func(ni *NodeInfo) (interface{}, error)) map[st
 }
 
 func (a *Aggregator) getNodesInfo() (map[string]*NodeInfo, error) {
-	services, err := a.clientset.CoreV1().Services(a.ns).List(
-		context.Background(),
-		metav1.ListOptions{
-			LabelSelector: labelSelector,
-		})
-	if err != nil {
-		return nil, fmt.Errorf("unable to aggregate nodes info: %w", err)
-	}
 
-	srvCount := len(services.Items)
-	log.Infof("Selected [%d] ReportPortal's services", srvCount)
-	nodesInfo := make(map[string]*NodeInfo, srvCount)
-	for _, srv := range services.Items {
-		log.Debugf("Info found for service %s", srv.GetName())
-
-		srvName := srv.GetAnnotations()["service"]
-		if srvName == "" {
-			continue
+	/*
+		services, err := a.clientset.CoreV1().Services(a.ns).List(
+			context.Background(),
+			metav1.ListOptions{
+				LabelSelector: labelSelector,
+			})
+		if err != nil {
+			return nil, fmt.Errorf("unable to aggregate nodes info: %w", err)
 		}
+	*/
 
-		ni := &NodeInfo{srv: srv.GetName() + "." + a.localDomain}
-		if ie, ok := srv.GetAnnotations()["infoEndpoint"]; ok {
-			ni.infoEndpoint = ie
-		} else {
-			ni.infoEndpoint = "/info"
+	nodesInfo := make(map[string]*NodeInfo, 1)
+
+	nodeInfo_1 := &NodeInfo{srv: "10.206.222.23"}
+	nodeInfo_1.infoEndpoint = "/info"
+	nodeInfo_1.healthEndpoint = "/health"
+	nodeInfo_1.portName = "8080"
+	nodesInfo["reportportal-analyzer"] = nodeInfo_1
+
+	/*
+		srvCount := len(services.Items)
+		log.Infof("Selected [%d] ReportPortal's services", srvCount)
+		nodesInfo := make(map[string]*NodeInfo, srvCount)
+
+		for _, srv := range services.Items {
+			log.Debugf("Info found for service %s", srv.GetName())
+
+			srvName := srv.GetAnnotations()["service"]
+			if srvName == "" {
+				continue
+			}
+
+			ni := &NodeInfo{srv: srv.GetName() + "." + a.localDomain}
+			if ie, ok := srv.GetAnnotations()["infoEndpoint"]; ok {
+				ni.infoEndpoint = ie
+			} else {
+				ni.infoEndpoint = "/info"
+			}
+			if he, ok := srv.GetAnnotations()["healthEndpoint"]; ok {
+				ni.healthEndpoint = he
+			} else {
+				ni.healthEndpoint = "/health"
+			}
+
+			if len(srv.Spec.Ports) > 0 {
+				ni.portName = srv.Spec.Ports[0].Name
+			}
+
+			nodesInfo[srvName] = ni
 		}
-		if he, ok := srv.GetAnnotations()["healthEndpoint"]; ok {
-			ni.healthEndpoint = he
-		} else {
-			ni.healthEndpoint = "/health"
-		}
-
-		if len(srv.Spec.Ports) > 0 {
-			ni.portName = srv.Spec.Ports[0].Name
-		}
-
-		nodesInfo[srvName] = ni
-	}
-
+	*/
 	return nodesInfo, nil
 }
 

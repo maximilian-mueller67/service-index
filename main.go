@@ -79,7 +79,7 @@ func main() {
 		router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 			http.Redirect(w, r, rpCfg.Path+"/ui/", http.StatusFound)
 		})
-		router.HandleFunc("/abc", func(w http.ResponseWriter, r *http.Request) {
+		router.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
 			http.Redirect(w, r, rpCfg.Path+"/ui/", http.StatusFound)
 		})
 		router.HandleFunc("/ui", func(w http.ResponseWriter, r *http.Request) {
