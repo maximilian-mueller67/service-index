@@ -92,6 +92,7 @@ func (a *Aggregator) AggregateHealth() map[string]interface{} {
 func (a *Aggregator) AggregateInfo() map[string]interface{} {
 	return a.aggregate(func(ni *NodeInfo) (interface{}, error) {
 		var rs map[string]interface{}
+		log.Infof("Calling this info endpoint: %s", ni.srv)
 		_, e := a.r.R().SetSRV(&resty.SRVRecord{Service: ni.portName, Domain: ni.srv}).SetResult(&rs).Get(ni.infoEndpoint)
 		if nil != e {
 			log.Errorf("Unable to aggregate info: %v", e)
