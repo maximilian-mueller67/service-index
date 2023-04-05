@@ -152,13 +152,51 @@ func (a *Aggregator) getNodesInfo() (map[string]*NodeInfo, error) {
 		}
 	*/
 
-	nodesInfo := make(map[string]*NodeInfo, 1)
+	nodesInfo := make(map[string]*NodeInfo, 6)
 
-	nodeInfo_1 := &NodeInfo{srv: "reportportal-analyzer.gta.svc.cluster.local"}
+	/*
+		nodeInfo_1 := &NodeInfo{srv: "reportportal-analyzer.gta.svc.cluster.local"}
+		nodeInfo_1.infoEndpoint = "/info"
+		nodeInfo_1.healthEndpoint = "/health"
+		nodeInfo_1.portName = "headless"
+		nodesInfo["reportportal-analyzer"] = nodeInfo_1
+	*/
+
+	nodeInfo_1 := &NodeInfo{srv: "reportportal-index.gta.svc.cluster.local"}
 	nodeInfo_1.infoEndpoint = "/info"
 	nodeInfo_1.healthEndpoint = "/health"
 	nodeInfo_1.portName = "headless"
-	nodesInfo["reportportal-analyzer"] = nodeInfo_1
+	nodesInfo["reportportal-index"] = nodeInfo_1
+
+	nodeInfo_2 := &NodeInfo{srv: "reportportal-api.gta.svc.cluster.local"}
+	nodeInfo_2.infoEndpoint = "/info"
+	nodeInfo_2.healthEndpoint = "/health"
+	nodeInfo_2.portName = "headless"
+	nodesInfo["reportportal-api"] = nodeInfo_2
+
+	nodeInfo_3 := &NodeInfo{srv: "reportportal-jobs.gta.svc.cluster.local"}
+	nodeInfo_3.infoEndpoint = "/info"
+	nodeInfo_3.healthEndpoint = "/health"
+	nodeInfo_3.portName = "headless"
+	nodesInfo["reportportal-jobs"] = nodeInfo_3
+
+	nodeInfo_4 := &NodeInfo{srv: "reportportal-metrics-gatherer.gta.svc.cluster.local"}
+	nodeInfo_4.infoEndpoint = "/info"
+	nodeInfo_4.healthEndpoint = "/health"
+	nodeInfo_4.portName = "headless"
+	nodesInfo["reportportal-metrics-gatherer"] = nodeInfo_4
+
+	nodeInfo_5 := &NodeInfo{srv: "reportportal-ui.gta.svc.cluster.local"}
+	nodeInfo_5.infoEndpoint = "/info"
+	nodeInfo_5.healthEndpoint = "/health"
+	nodeInfo_5.portName = "headless"
+	nodesInfo["reportportal-ui"] = nodeInfo_5
+
+	nodeInfo_6 := &NodeInfo{srv: "reportportal-uat.gta.svc.cluster.local"}
+	nodeInfo_6.infoEndpoint = "/info"
+	nodeInfo_6.healthEndpoint = "/health"
+	nodeInfo_6.portName = "headless"
+	nodesInfo["reportportal-uat"] = nodeInfo_6
 
 	/*
 		srvCount := len(services.Items)
