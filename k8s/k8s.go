@@ -92,7 +92,7 @@ func (a *Aggregator) AggregateHealth() map[string]interface{} {
 func (a *Aggregator) AggregateInfo() map[string]interface{} {
 	return a.aggregate(func(ni *NodeInfo) (interface{}, error) {
 		var rs map[string]interface{}
-		log.Infof("Calling this info endpoint: %s", ni.srv)
+
 		_, e := a.r.R().SetSRV(&resty.SRVRecord{Service: ni.portName, Domain: ni.srv}).SetResult(&rs).Get(ni.infoEndpoint)
 		if nil != e {
 			log.Errorf("Unable to aggregate info: %v", e)
@@ -100,6 +100,7 @@ func (a *Aggregator) AggregateInfo() map[string]interface{} {
 			return nil, fmt.Errorf("unable to aggregate info: %w", e)
 		}
 		if nil == rs {
+			log.Infof("Error calling info endpoint: %s", ni.srv)
 			log.Error("Unable to collect info endpoint response")
 
 			return nil, errors.New("response is empty")
@@ -163,7 +164,7 @@ func (a *Aggregator) getNodesInfo() (map[string]*NodeInfo, error) {
 		nodesInfo["reportportal-analyzer"] = nodeInfo_1
 	*/
 
-	nodeInfo_1 := &NodeInfo{srv: "reportportal-index.gta.svc.cluster.local"}
+	nodeInfo_1 := &NodeInfo{srv: "localhost"}
 	nodeInfo_1.infoEndpoint = "/info"
 	nodeInfo_1.healthEndpoint = "/health"
 	nodeInfo_1.portName = "headless"
