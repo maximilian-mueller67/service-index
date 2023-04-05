@@ -154,7 +154,7 @@ func (a *Aggregator) getNodesInfo() (map[string]*NodeInfo, error) {
 		}
 	*/
 
-	nodesInfo := make(map[string]*NodeInfo, 6)
+	nodesInfo := make(map[string]*NodeInfo, 5)
 
 	/*
 		nodeInfo_1 := &NodeInfo{srv: "reportportal-analyzer.gta.svc.cluster.local"}
@@ -164,7 +164,7 @@ func (a *Aggregator) getNodesInfo() (map[string]*NodeInfo, error) {
 		nodesInfo["reportportal-analyzer"] = nodeInfo_1
 	*/
 
-	nodeInfo_1 := &NodeInfo{srv: "localhost"}
+	nodeInfo_1 := &NodeInfo{srv: "reportportal-index.gta.svc.cluster.local"}
 	nodeInfo_1.infoEndpoint = "/info"
 	nodeInfo_1.healthEndpoint = "/health"
 	nodeInfo_1.portName = "headless"
@@ -181,12 +181,6 @@ func (a *Aggregator) getNodesInfo() (map[string]*NodeInfo, error) {
 	nodeInfo_3.healthEndpoint = "/health"
 	nodeInfo_3.portName = "headless"
 	nodesInfo["reportportal-jobs"] = nodeInfo_3
-
-	nodeInfo_4 := &NodeInfo{srv: "reportportal-metrics-gatherer.gta.svc.cluster.local"}
-	nodeInfo_4.infoEndpoint = "/info"
-	nodeInfo_4.healthEndpoint = "/health"
-	nodeInfo_4.portName = "headless"
-	nodesInfo["reportportal-metrics-gatherer"] = nodeInfo_4
 
 	nodeInfo_5 := &NodeInfo{srv: "reportportal-ui.gta.svc.cluster.local"}
 	nodeInfo_5.infoEndpoint = "/info"
