@@ -154,7 +154,7 @@ func (a *Aggregator) getNodesInfo() (map[string]*NodeInfo, error) {
 		}
 	*/
 
-	nodesInfo := make(map[string]*NodeInfo, 5)
+	nodesInfo := make(map[string]*NodeInfo, 6)
 
 	/*
 		nodeInfo_1 := &NodeInfo{srv: "reportportal-analyzer.gta.svc.cluster.local"}
@@ -193,6 +193,12 @@ func (a *Aggregator) getNodesInfo() (map[string]*NodeInfo, error) {
 	nodeInfo_6.healthEndpoint = "/health"
 	nodeInfo_6.portName = "headless"
 	nodesInfo["reportportal-uat"] = nodeInfo_6
+
+	nodeInfo_7 := &NodeInfo{srv: "reportportal-metrics-gatherer.gta.svc.cluster.local"}
+	nodeInfo_7.infoEndpoint = "/info"
+	nodeInfo_7.healthEndpoint = "/health"
+	nodeInfo_7.portName = "headless"
+	nodesInfo["reportportal-metrics-gatherer"] = nodeInfo_7
 
 	/*
 		srvCount := len(services.Items)

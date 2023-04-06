@@ -48,7 +48,6 @@ func main() {
 
 	srv := server.New(rpCfg.ServerConfig, info)
 
-	log.Info("Yoo")
 	log.Infof("K8S mode enabled: %t", rpCfg.K8sMode)
 	var aggreg aggregator.Aggregator
 	if rpCfg.K8sMode {
@@ -67,11 +66,13 @@ func main() {
 		})
 
 		router.HandleFunc("/composite/info", func(w http.ResponseWriter, r *http.Request) {
+			log.Info("Calling composite/info")
 			if err := server.WriteJSON(http.StatusOK, aggreg.AggregateInfo(), w); nil != err {
 				log.Error(err)
 			}
 		})
 		router.HandleFunc("/composite/health", func(w http.ResponseWriter, r *http.Request) {
+			log.Info("Calling composite/health")
 			if err := server.WriteJSON(http.StatusOK, aggreg.AggregateHealth(), w); nil != err {
 				log.Error(err)
 			}
